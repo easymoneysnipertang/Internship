@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/css/layui.css" media="all">
+    <script src="/static/layui.js" charset="utf-8"></script>
+</head>
+<body>
+<form class="layui-form" action="" id="form1">
+<br>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">事件名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="event_name"   autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">事件时间</label>
+            <div class="layui-input-inline">
+                <input type="text" name="event_time"   autocomplete="off" placeholder="输入年份即可" class="layui-input">
+            </div>
+        </div>
+          <div class="layui-inline">
+            <label class="layui-form-label">事件地点</label>
+            <div class="layui-input-inline">
+                <input type="text" name="event_situation"   autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div>
+    <div class="layui-form">
+  <hr class="ws-space-16">
+  <textarea name="event_stars" placeholder="请输入相关明星，用中文逗号隔开。" class="layui-textarea"></textarea>
+    </div>
+</div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button type="submit" onclick="doSave()" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+</div>
+</form>
+<script>
+    var $,layer;
+      layui.use(['form','laydate'],function (){
+       var laydate = layui.laydate;
+       $=layui.jquery;
+       layer=layui.layer;
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#orderdate'
+        });
+    })
+    function doSave() {
+       var requestData = $("#form1").serialize();
+        $.post("/order/save",requestData,function (responseData) {
+            if(responseData.success == 1){
+               parent.layer.alert("添加事件成功",{yes:function () {
+                       parent.layer.closeAll();
+                       parent.location.reload();
+                   }});
+            }
+            else{
+                layer.alert("输入明星有不存在于数据库中的，请再次检查！")
+            }
+        });
+    }
+</script>
+</body>
+</html>
