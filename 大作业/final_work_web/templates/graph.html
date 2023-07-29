@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 图标组件库 -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/css/graph.css">
+    <link rel="stylesheet" href="/static/css/layui.css">
+    <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+    <title>Harry Potter</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Open+Sans:wght@400;500;600;700&display=swap');
+    </style>
+</head>
+<body>
+<!--侧滑栏部分-->
+<nav class="sidebar">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <img src="{{ url_for('static', filename="image/graph/9.75.jpg") }}" alt="">
+            </span>
+            <div class="text logo-text">
+                <span class="name">Harry Potter</span>
+                <span class="profession">by J.K.Rowling</span>
+            </div>
+        </div>
+        <i class="bx bx-chevron-right toggle"></i>
+    </header>
+    <div class="menu-bar">
+        <div class="menu">
+            <div class="search-box">
+            <form action="/graph/select" method="post" style="display: flex;">
+                 <input type="text" name="node" id="searchInput" placeholder="Search..." class="layui-input" >
+                 <button type="submit" >
+                            <i class="bx bx-search icon" style="margin-left: 0px;"></i>
+                 </button>
+            </form>
+            </div>
+        <!--根据搜索结果在输出栏中加入结果-->
+            {% if search_neo4j_data %}
+                <script>
+                switch ("{{ node_name }}")
+                {
+                    case"哈利·波特":
+                            document.write(`
+    <div class="card">
+      <div class="photo">
+        <img src="/static/image/graph/头像1.jpg" alt="1">
+      </div>
+      <h1>哈利·波特</h1>
+      <h2>HarryPotter</h2>
+      <p>生于1980年7月31日，是巫师夫妇詹姆·波特和莉莉·波特的独生子。</p>
+    </div>
+    <div class="recommendation">
+       <div class="recommendation-title">
+           <img src="/static/image/graph/相关推荐.png" alt="">
+       </div>
+       <h1 id="related_node"></h1>
+    </div>
+  `)
+                        var related_node="{{ related_node }}";
+                        var h1Element=document.getElementById("related_node");
+                        h1Element.textContent=related_node;
+                        break;
+                    case"赫敏·格兰杰":
+                        document.write(`
+    <div class="card">
+      <div class="photo">
+        <img src="/static/image/graph/头像3.jpg" alt="1">
+      </div>
+      <h1>赫敏·格兰杰</h1>
+      <h2>Hermione Granger</h2>
+      <p>生于1979年9月19日，出身一个麻瓜家庭。在书中以一个喜好钻研学术及无所不知的聪明女孩形象出现。</p>
+    </div>
+    <div class="recommendation">
+       <div class="recommendation-title">
+           <img src="/static/image/graph/相关推荐.png" alt="">
+       </div>
+       <h1 id="related_node"></h1>
+    </div>
+  `);
+                        var related_node="{{ related_node }}";
+                        var h1Element=document.getElementById("related_node");
+                        h1Element.textContent=related_node;
+                        break;
+                    case"罗恩·韦斯莱":
+                        document.write(`
+    <div class="card">
+      <div class="photo">
+        <img src="/static/image/graph/头像2.jpg" alt="1">
+      </div>
+      <h1>罗恩·韦斯莱</h1>
+      <h2>Ron Weasley</h2>
+      <p>生于1980年3月1日，哈利·波特在霍格沃茨最要好的朋友，书中的喜剧角色。韦斯莱家族是古老的纯血统家族，他们都拥有一头火焰般的红发。</p>
+    </div>
+    <div class="recommendation">
+       <div class="recommendation-title">
+           <img src="/static/image/graph/相关推荐.png" alt="">
+       </div>
+       <h1 id="related_node"></h1>
+    </div>
+  `);
+                        var related_node="{{ related_node }}";
+                        var h1Element=document.getElementById("related_node");
+                        h1Element.textContent=related_node;
+                        break;
+                    default:
+                        document.write(`
+     <div class="text_card">
+         <h1 id="text_card_title"></h1>
+         <p id="text_card_text"></p>
+    </div>
+    <div class="recommendation">
+       <div class="recommendation-title">
+           <img src="/static/image/graph/相关推荐.png" alt="">
+       </div>
+       <h1 id="related_node"></h1>
+    </div>
+  `);
+                        var node="{{ node_name }}";
+                        var tag="{{ tag }}";
+                        var related_node="{{ related_node }}";
+                        var titleElement=document.getElementById("text_card_title");
+                        var tagElement=document.getElementById("text_card_text");
+                        var h1Element=document.getElementById("related_node");
+                        titleElement.textContent=node;
+                        tagElement.textContent=tag;
+                        h1Element.textContent=related_node;
+                        break;
+                }
+                </script>
+          {% endif %}
+        </div>
+    </div>
+</nav>
+<!--主页部分-->
+<section class="home">
+    <div class="text">Knowledge Graph</div>
+    <div class="container_search-sticker">
+     {% if ctx %}
+    <div class="container_search">
+        <h1>The entity is not added to the database!</h1>
+    </div>
+     {% elif search_neo4j_data %}
+     <div class="container_search" id="search_outcome" ></div>
+     {% else %}
+    <div class="container_search">
+        <h1>Welcome to Hogwarts.</h1>
+    </div>
+     {% endif %}
+        <div class="sticker">
+       <!--这里贴一个小贴纸-->
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</section>
+<!--echarts绘制知识图谱-->
+<script type="text/javascript">
+    {#查询单个#}
+    let search_neo4j_data=[{{ search_neo4j_data|safe }}]
+    let data2=search_neo4j_data[0]['data']
+    let links2=search_neo4j_data[0]['links']
+    console.log(data2)
+    console.log(links2)
+    let myChart2 = echarts.init(document.getElementById('search_outcome'));
+    let categories2 = [{name: "center"}, {name: "对象"}, {name: "组织"}, {name: "职业"}];
+    option2 = {
+        // 提示框的配置
+        tooltip: {
+            formatter: function (x) {
+                return x.data.des;
+            }
+        },
+        // 工具箱
+        toolbox: {
+            // 显示工具箱
+            show: true,
+            feature: {
+                mark: {
+                    show: true
+                },
+                // 还原
+                restore: {
+                    show: true
+                },
+                // 保存为图片
+                saveAsImage: {
+                    show: true
+                }
+            }
+        },
+        legend: [{
+            // selectedMode: 'single',
+            textStyle:{
+                            fontSize: 10, //字体大小
+                            color: '#ffffff'}, //字体颜色
+            data: categories2.map(function (a) {
+                return a.name;
+            })
+        }],
+        series: [{
+            type: 'graph', // 类型:关系图
+            layout: 'force', //图的布局，类型为力导图
+            symbolSize: 50, // 调整节点的大小
+            roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+            focusNodeAdjacency:true, // 当鼠标移动到节点上，突出显示节点以及节点的边和邻接节点
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [2, 10],
+            edgeLabel: {
+                normal: {
+                    textStyle: {
+                        fontSize: 10
+                    },
+                    show: true,
+                    formatter: function (x) {
+                        return x.data.name;
+                    }
+                },
+            },
+            force: { // 调整节点间斥力，旋转
+                repulsion : 100, // 节点之间的斥力因子。
+                gravity : 0.03, // 节点受到的向中心的引力因子。
+                edgeLength :220, // 边的两个节点之间的距离
+                layoutAnimation : true
+            },
+            draggable: true,
+            lineStyle: {
+                normal: {
+                    width: 2,
+                    color: '#4b565b',
+                    curveness: 0.2, // 曲率，避免重合
+                },
+            },
+            itemStyle: { // 节点颜色
+                 emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(30, 144, 255，0.5)'
+                },
+            },
+            label: {
+                normal: {
+                    show: true,
+                    textStyle: {}
+                }
+            },
+            // 数据
+            data: data2,
+            links: links2,
+            categories: categories2,
+            color: ['#78301d', '#48795c', '#516a80', '#b49751'],
+        }]
+    };
+    myChart2.setOption(option2);
+</script>
+<!--搜索下拉框设置-->
+
+<script src="/static/js/graph.js"></script>
+</body>
+</html>

@@ -1,0 +1,478 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Open+Sans:wght@400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* 一些需要重复使用的样式 */
+:root {
+    /* 颜色 */
+    --body-color:#18191a;
+    --sidebar-color:#242526;
+    --primary-color:#3a3b3c;
+    --primary-color-light:#3a3b3c;
+    --toggle-color:#fff;
+    --text-color:#ccc;
+
+    /* 过渡效果 */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    
+    /*字体样式*/
+    --ffOne: 'Open Sans', sans-serif;
+    --ffTwo: 'Berkshire Swash', cursive;
+}
+
+body{
+    min-height: 100vh;
+    background-color: var(--body-color);
+    transition: var(--tran-03);
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* sidebar上的初始化样式 */
+.sidebar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 400px;
+    padding: 10px 14px;
+    background: #020912;
+    transition: var(--tran-03);
+    z-index: 100;
+}
+
+.sidebar.close{
+    width: 0px;
+}
+
+
+.sidebar header .image,.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+}
+
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.sidebar .text,.sidebar .icon{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+.sidebar .text{
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+.sidebar.close .text{
+    opacity: 0;
+}
+
+/* header部分样式 */
+
+.sidebar header{
+    position: relative;
+}
+
+.sidebar header .image-text{
+    display: flex;
+    align-items: center;
+}
+
+.sidebar header .logo-text{
+    display: flex;
+    flex-direction: column;
+}
+
+header .image-text .name{
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: var(--ffTwo);
+}
+
+header .image-text .profession{
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+    font-family: var(--ffOne);
+}
+
+.sidebar header .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar header .image img{
+    width: 40px;
+    border-radius: 6px;
+}
+.sidebar header .toggle{
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-03);
+}
+
+.sidebar.close .toggle{
+    transform: translateY(-50%) rotate(0deg);
+}
+
+.sidebar .menu{
+    margin-top: 20px;
+}
+/*搜索框样式设立*/
+/*设置输入文字字体*/
+input[type="text"] {
+    font-family: var(--ffTwo);
+}
+.sidebar .search-box{
+    position: sticky;
+    z-index: 999;
+    top: 10px;
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    cursor: pointer;
+    transition: var(--tran-03);
+    width: 350px;
+}
+.sidebar .search-box input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size:20px;
+    font-weight: 500;
+    transition: var(--tran-03);
+    font-family: var(--ffTwo);
+    height: 30px;
+}
+
+
+.sidebar li a{
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+.sidebar li a:hover{
+    background-color: var(--primary-color);
+}
+.sidebar li a:hover .icon,.sidebar li a:hover .text{
+    color: var(--sidebar-color);
+}
+/*侧栏栏主搜索栏+输出部分*/
+.sidebar .menu-bar{
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+.menu-bar::-webkit-scrollbar{
+    display: none;
+}
+
+.sidebar .menu-bar .mode{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition-timing-function: var(--tran-03);
+}
+
+.menu-bar .bottom-content .toggle-switch{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.toggle-switch .switch{
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-03);
+}
+
+.switch::before{
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius:50% ;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-03);
+}
+/*主页设置部分*/
+.home{
+    position: absolute;
+    top: 0;
+    left: 400px;
+    height: 100vh;
+    width: calc(100% - 250px);
+    background-image: url("../image/graph/background-3.jpg");
+    background-size: cover;
+    transition: var(--tran-03);
+}
+
+.home .text{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 12px 60px;
+    font-family: var(--ffTwo);
+}
+
+.home .container_search-sticker
+{ width:1400px;
+ height:800px;
+ background-color: transparent;
+ border-radius: 10px;
+ margin-left: 50px; 
+ margin-top: 10px;
+}
+
+.container_search-sticker .container_search {
+    width: 1020px;
+    height: 700px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin-left: 50px;
+    margin-top: 10px;
+    float: left;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container_search-sticker .container_search h1{
+    font-family: var(--ffTwo);
+    text-align: center;
+    font-size: 70px;
+}
+
+.container_search-sticker .sticker {
+    width: 300px;
+    height: 580px;
+    margin-top: 10px;
+    float: left;
+
+}
+
+.clear{
+    clear:both;
+}
+
+.sidebar.close~.home{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+/*搜索结果弹出人物卡片*/
+.card{
+    /* 相对定位 */
+    position: relative;
+    /* 图片大小和排列 */
+    width: 300px;
+    height: 450px;
+    margin-top: 50px;
+    margin-left:30px ;
+    background-color: rgba(83,93,96,0.5);
+    border-radius: 20px;
+    /* 溢出隐藏 */
+    overflow: hidden;
+    /* 弹性布局 */
+    display: flex;
+    /* 元素纵向排列 */
+    flex-direction: column;
+    /* 居中 */
+    align-items: center;
+    color: #fff;
+    /* 阴影 */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    /* 不让其他被挤压 */
+    flex-shrink: 0;
+}
+.card .photo img{
+    width: 100%;
+    height: 100%;
+    /* 保持原有尺寸比例,裁切长边 */
+    object-fit: cover;
+}
+/* 默认大图 */
+.card .photo{
+    /* 绝对定位 */
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0%;
+    overflow: hidden;
+    /* 动画过渡 */
+    transition: 0.5s;
+}
+/* 鼠标移入变小图 */
+.card:hover .photo{
+    top: 30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+/* 这里加个黑色到透明的渐变背景，可以更好的看清楚名字 */
+.card .photo::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,transparent 50%,#222);
+}
+.card h1{
+    position: absolute;
+    top: 370px;
+    transition: 0.5s;
+}
+.card:hover h1{
+    top: 170px;
+}
+.card h2{
+    margin-top: 220px;
+    width: 80%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    font-family:var(--ffTwo);
+}
+.card p {
+    width: 90%;
+    text-indent: 32px;
+    font-size: 16px;
+
+    line-height: 30px;
+}
+.card a{
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 8px 32px;
+    border-radius: 8px;
+}
+.card a:hover{
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+/*推荐框的设计*/
+.recommendation{
+    position: relative;
+    /* 图片大小和排列 */
+    width: 300px;
+    height: 100px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-left:30px ;
+    background-color:transparent;
+}
+
+.recommendation .recommendation-title
+{   width: 300px;
+    height: 50px;
+    border-radius: 20px;
+}
+
+.recommendation .recommendation-title img{
+    width: 100%;
+    height: 100%;
+    /* 不保持原有比例，要求充满整个框 */
+    object-fit: contain;
+}
+
+.recommendation h1{
+    color: white;
+    font-size: 14px;
+}
+
+/*对于返回不了图片的进行文本框设计*/
+.text_card{
+    position: relative;
+    /* 图片大小和排列 */
+    width: 300px;
+    height: 250px;
+    border-radius: 20px;
+    margin-top: 40px;
+    margin-left:30px ;
+    background-color:rgba(255, 255, 255, 0.2);
+    background: url("/static/image/graph/text.png")no-repeat;
+    background-size: contain;
+    background-position: center;
+    border: 1px dashed rgba(255, 255, 255, 0.5);
+}
+
+.text_card h1{
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    padding: 10px;
+}
+
+.text_card p{
+    color: white;
+    font-size: 15px;
+    padding: 5px 10px;
+    line-height: 1.6;
+    text-indent: 2em;
+    letter-spacing: 1px;
+    font-weight: 10;
+}

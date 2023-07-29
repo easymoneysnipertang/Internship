@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Potter</title>
+    <!-- Animate on scroll CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/home.css">
+</head>
+
+<body>
+    <embed src="{{ url_for('static', filename="MP3/song.mp3") }}" hidden="true" autostart="true" loop="true">
+    <header>
+    <img class="logo" src="{{ url_for('static', filename="image/logo.png") }}" alt="Logo">
+    <nav class="navigation">
+        <a href="#" class="active">Home<span></span></a>
+        <a href="/graph">Graph<span></span></a>
+    </nav>
+    </header>
+
+    <section class="parallax">
+        <img src="{{ url_for('static', filename="image/Harry.png") }}" alt="" id="fixed-title">
+        <img src="{{ url_for('static', filename="image/tree-left.png") }}" alt="" id="tree-left">
+        <img src="{{ url_for('static', filename="image/tree-right.png") }}" alt="" id="tree-right">
+        <img src="{{ url_for('static', filename="image/gate-left.png") }}" alt="" id="gate-left">
+        <img src="{{ url_for('static', filename="image/gate-right.png") }}" alt="" id="gate-right">
+        <img src="{{ url_for('static', filename="image/grass.png") }}" alt="" id="grass">
+    </section>
+    
+    <section class="introduction" >
+        <h1>About the story</h1>
+        <p><br>Harry Potter is a series of fantasy novels written by British author J.K. Rowling. The series follows the life of a young wizard named Harry Potter and his friends Hermione Granger and Ron Weasley, who all attend the Hogwarts School of Witchcraft and Wizardry. The story begins with Harry discovering that he is a wizard and the famous "Boy Who Lived," having survived an attack by the dark wizard Lord Voldemort as a baby.<br>
+    
+            Throughout the series, Harry learns about his magical heritage, encounters various magical creatures and artifacts, and faces numerous challenges and adventures. He becomes involved in the ongoing battle between good and evil, with Voldemort and his followers, known as Death Eaters, seeking to gain power and control over the wizarding world.<br>
+            
+            The Harry Potter books explore themes of friendship, love, loyalty, and the struggle between good and evil. They have captivated readers of all ages and have become one of the most successful and beloved book series of all time. The series has also been adapted into a highly successful film franchise and has spawned various merchandise and spin-off works.
+        </p>
+        <img src="{{ url_for('static', filename="image/intro.png") }}" alt=""  id="intro-1" >
+       
+    </section>
+
+    <section class="scroll-down-section" >
+        <img src="{{ url_for('static', filename="image/down arrow.png") }}" class="scroll-down-icon" alt="scroll down">
+    </section>
+
+    <section class="scroll-down-section1" >
+        <h1 class="scroll-text">Film Series</h1>
+        <p class="scroll-para">The Harry Potter film series is a captivating journey through the wizarding world created by J.K. Rowling. Spanning eight movies, the series brings to life the magical adventures of Harry Potter, a young wizard with a destiny to fulfill.</p>
+    </section>
+
+    <section class="series-movies">
+        <div class="banner-box">
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-1.jpg") }}" alt=""></div>
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-2.jpg") }}" alt=""></div>
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-3.jpg") }}" alt=""></div>
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-4.jpg") }}" alt=""></div>
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-5.jpg") }}" alt=""></div>
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-6.jpg") }}" alt=""></div>
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-7.jpg") }}" alt=""></div>
+        <div class="banner-item"><img src="{{ url_for('static', filename="image/roll-8.jpg") }}" alt=""></div>
+        </div>
+        <!-- 左右箭头 -->
+        <button class="slide-left-btn">
+            <img src="{{ url_for('static', filename="image/left_arrow.png") }}" alt="Left Arrow">
+          </button>
+
+          <button class="slide-right-btn">
+            <img src="{{ url_for('static', filename="image/right_arrow.png") }}" alt="Right Arrow">
+          </button>
+        <div class="pagination-box"></div>
+    </section>
+
+    <section class="scroll-down-section" >
+        <img src="{{ url_for('static', filename="image/down arrow.png") }}" class="scroll-down-icon" alt="scroll down">
+    </section>
+
+    <section class="scroll-down-section1" >
+        <h1 class="scroll-text">Hogwarts School of Witchcraft and Wizardry</h1>
+        <p class="scroll-para">Founded centuries ago, Hogwarts is steeped in tradition and is widely regarded as one of the finest magical schools. It is divided into four distinct houses: Gryffindor, Hufflepuff, Ravenclaw, and Slytherin. Each house has its own unique qualities and values, and students are sorted into these houses based on their traits and characteristics.</p>
+    </section>
+    
+    <section class="schools">
+        <div class="box-container">
+    
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename="image/flag-1.png") }}" alt="">
+                </div>
+               
+            </div>
+    
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename="image/flag-2.png") }}" alt="">
+                </div>
+
+            </div>
+    
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename="image/flag-3.png") }}" alt="">
+                </div>
+                
+            </div>
+    
+            <div class="box">
+                <div class="image">
+                    <img src="{{ url_for('static', filename="image/flag-4.png") }}" alt="">
+                </div>
+                
+            </div>
+
+        </div>
+    </section>
+    <section class="schools">
+        <div class="box-container">
+            <div class="box">
+                <div class="content">
+                    <h1><a href="/graph/Gryffondor_search">Gryffindor</a></h1>
+                    <p> Known for bravery and courage, Gryffindor values chivalry and daring. Its members are often noble and willing to stand up for what's right.</p>
+                </div>  
+            </div>
+            <div class="box">
+                <div class="content">
+                    <h2><a href="/graph/Slytherin_search">Slytherin</a></h2>
+                    <p>Slytherin is known for ambition and resourcefulness. They value cunning and determination, and are willing to do whatever it takes to achieve their goals.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="content">
+                    <h3><a href="/graph/Ravenclaw_search">Ravenclaw</a> </h3>
+                    <p> Known for intelligence and wit, Ravenclaw values wisdom and creativity. Its members are often highly intellectual and enjoy pursuing academic pursuits.</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="content">
+                    <h4><a href="/graph/Hufflepuff_search">Hufflepuff</a> </h4>
+                    <p>Characterized by loyalty and hard work, Hufflepuff values dedication and fairness. They foster a strong sense of community and inclusiveness.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scroll-down-section" >
+        <img src="{{ url_for('static', filename="image/down arrow.png") }}" class="scroll-down-icon" alt="scroll down">
+    </section>
+
+    <section class="scroll-down-section1" >
+        <h1 class="scroll-text">Are you ready to start your own journey?</h1>
+
+    </section>
+    
+    <div class="btn-bar">
+        <a href="/graph" class="btn">Explore More</a>
+        <div class="footer">
+            <div class="container">
+                <p>Copyright © 2023. All rights reserved</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- animate on scoll JS CDN -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/static/js/home.js"></script>
+</body>
+
+</html>
